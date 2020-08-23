@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:bezier_chart/bezier_chart.dart';
 import 'package:shake/shake.dart';
+import 'package:flutter_coffee_count/model/caffeineModel.dart';
+import 'package:flutter_coffee_count/databases/database_helper.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -17,23 +20,22 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<StatefulWidget> createState() {
+    return _MyHomePageState();
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
 
-   @override
+  @override
   void initState() {
     super.initState();
     ShakeDetector.autoStart(onPhoneShake: () {
@@ -44,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final int caffeinePerCoffee = 70;
   int caffeineAmount = 0;
+
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  List<CaffeineModel> caffeineValuesList;
 
   Color green = Colors.lightGreen;
   Color blue = Colors.lightBlueAccent;
@@ -235,4 +240,5 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
 }
